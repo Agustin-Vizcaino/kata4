@@ -10,7 +10,7 @@ public class Main {
     private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
     private static MainWindow window;
     public static void main(String[] args) throws IOException {
-        HashMap<String,City> citiesMap;
+        HashMap<String,City> citiesMap = null;
         List<City> citiesList = CityDataReader.readCitiesFromPath(path);
         if (citiesList != null) {
             citiesMap = (HashMap<String,City>) cityHasher(citiesList);
@@ -18,6 +18,8 @@ public class Main {
         } else {
             System.out.println("Error interpreting/reading data");
         }
+        //sendDataset(citiesList);
+        sendDataset(citiesMap);
     }
 
     public static Map<String,City> cityHasher(List<City> cities) {
@@ -41,6 +43,10 @@ public class Main {
 
     public static void generateWindow() {
         window = new MainWindow();
+    }
+
+    public static void sendDataset(Map data) {
+        JFCHistogram.makeDataset(data);
     }
 
 }
