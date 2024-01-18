@@ -46,7 +46,7 @@ public class Main {
     }
 
     public static void sendDataset(Map data) {
-        JFCHistogram.makeDataset(data);
+        JFCPopulationBarChart.makeDataset(data);
     }
 
 }
