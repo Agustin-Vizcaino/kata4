@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
+    private static MainWindow window;
     public static void main(String[] args) throws IOException {
         HashMap<String,City> citiesMap;
         List<City> citiesList = CityDataReader.readCitiesFromPath(path);
@@ -36,6 +37,10 @@ public class Main {
             System.out.println(citiesMap.get(key).toString());
         }
         System.out.println("\nTotal number of registered, non-duplicate cities above 1M inhabitants: " + citiesMap.size());
+    }
+
+    public static void generateWindow() {
+        window = new MainWindow();
     }
 
 }
