@@ -1,12 +1,16 @@
 package agustin.kata4;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Stream;
 
-public abstract class DataFileLoader {
+public class DataFileLoader implements BasicDataLoader {
 
-    private DataFileLoader() {}
+    public DataFileLoader() {}
 
-    public static File loadPath(String path) {
+    @Override
+    public Object loadPath(String path) {
         return new File(path);
     }
 }

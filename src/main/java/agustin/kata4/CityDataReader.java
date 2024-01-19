@@ -10,6 +10,9 @@ public class CityDataReader {
     private static final int popThreshold = 1000000;
     private CityDataReader() {}
 
+    //Here we see we made a mistake and produced slight technical debt- Main is not affected by the change from CSV to
+    //database, but CityDataReader needs to switch from calling DataFileReader to DataBaseReader, and from
+    //receiving a BufferedReader to a Stream
     public static List<City> readCitiesFromPath(String path) throws IOException {
         BufferedReader reader = DataFileReader.readPath(path);
 
