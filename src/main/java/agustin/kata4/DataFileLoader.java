@@ -1,4 +1,4 @@
-package agustin.kata3;
+package agustin.kata4;
 
 import java.io.File;
 

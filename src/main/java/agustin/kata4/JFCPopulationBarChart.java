@@ -1,4 +1,4 @@
-package agustin.kata3;
+package agustin.kata4;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -18,7 +18,6 @@ import org.jfree.ui.TextAnchor;
 import javax.swing.*;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
 

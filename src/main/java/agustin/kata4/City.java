@@ -1,6 +1,4 @@
-package agustin.kata3;
-
-import java.util.List;
+package agustin.kata4;
 
 public class City {
     //Dataset source: https://public.opendatasoft.com/explore/dataset/geonames-all-cities-with-a-population-1000/table/?disjunctive.cou_name_en&sort=name

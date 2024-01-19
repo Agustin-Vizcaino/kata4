@@ -1,11 +1,7 @@
-package agustin.kata3;
+package agustin.kata4;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
