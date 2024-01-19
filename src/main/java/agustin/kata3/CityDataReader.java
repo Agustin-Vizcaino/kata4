@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ public class CityDataReader {
                         return City.makeCity(fields);
                     })
                     .filter(city -> city.getPopulation() >= popThreshold)
+                    .sorted(City::compare)
                     .collect(Collectors.toList());
             //System.out.println(cities.size());
         }

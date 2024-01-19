@@ -3,6 +3,7 @@ package agustin.kata3;
 import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,10 +12,10 @@ public class Main {
     private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
     private static MainWindow window;
     public static void main(String[] args) throws IOException {
-        HashMap<String,City> citiesMap = null;
+        LinkedHashMap<String,City> citiesMap = null;
         List<City> citiesList = CityDataReader.readCitiesFromPath(path);
         if (citiesList != null) {
-            citiesMap = (HashMap<String,City>) cityHasher(citiesList);
+            citiesMap = cityHasher(citiesList);
             analyze(citiesMap);
             generateWindow();
             setupBarChart(citiesMap);
@@ -25,16 +26,12 @@ public class Main {
         //sendDataset(citiesList);
     }
 
-    public static Map<String,City> cityHasher(List<City> cities) {
-        //System.out.println(cities);
-        return new HashMap<>(cities
-                .stream()
-                .collect(Collectors
-                        //All my respect to whoever thought to add the third argument to resolve clashes
-                        .toMap(City::getFullName, city -> city, (city1, city2) -> {
-                            if (city1.getPopulation() > city2.getPopulation()) return city1;
-                            return city2;
-                        })));
+    public static LinkedHashMap<String, City> cityHasher(List<City> cities) {
+        return cities.stream()
+                .collect(LinkedHashMap::new,
+                        (map, city) -> map.merge(city.getFullName(), city, (city1, city2) ->
+                                city1.compare(city2) >= 1 ? city1 : city2),
+                        LinkedHashMap::putAll);
     }
 
     public static void analyze(HashMap<String,City> citiesMap) {

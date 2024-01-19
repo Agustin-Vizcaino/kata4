@@ -79,4 +79,8 @@ public class City {
         String[] fields = line.split(";");
         return new String[] { fields[0], fields[1], fields[6], fields[7], fields[13] };
     }
+
+    public int compare(City city) {
+        return Integer.compare(this.getPopulation(), city.getPopulation());
+    }
 }
