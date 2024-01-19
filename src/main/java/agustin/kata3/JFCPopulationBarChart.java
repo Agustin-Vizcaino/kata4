@@ -22,7 +22,10 @@ import java.util.stream.Collectors;
 
 public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
 
-    /**@Override
+    private int width = 700;
+    private int height = 700;
+
+    /*@Override
     public void create(Map data) {
         JFreeChart barChart = ChartFactory.createStackedBarChart(
                 "Largest cities on Earth compared by population",
@@ -33,11 +36,7 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
                 false, false, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(700, 700)); // Set the initial preferred size
-
-        // Set the chart panel to expand and fill the space
-        chartPanel.setDomainZoomable(true);
-        chartPanel.setRangeZoomable(true);
+        chartPanel.setPreferredSize(new java.awt.Dimension(width, height));
 
         add(chartPanel);
     }*/
@@ -72,29 +71,20 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
         );
         renderer.setBasePositiveItemLabelPosition(position);
 
-        add(new ChartPanel(barChart));
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(width, height));
+
+        add(chartPanel);
     }
 
     public static CategoryDataset makeDataset(Map<Object, City> data) {
-        try {
-            DefaultCategoryDataset returner = new DefaultCategoryDataset();
+        DefaultCategoryDataset returner = new DefaultCategoryDataset();
 
-            // Sort the entries by population in descending order
-            data.entrySet().stream()
-                    .sorted(Map.Entry.<Object, City>comparingByValue(Comparator.comparingInt(City::getPopulation)).reversed())
-                    .limit(10)
-                    .forEach(entry -> {
-                        String key = entry.getKey().toString();
-                        //Depending on whether you want to show the city names, which doesn't work
-                        //returner.addValue((double) entry.getValue().getPopulation(), key, "");
-                        returner.addValue(entry.getValue().getPopulation(), key, entry.getValue().getName());
+        data.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> -entry.getValue().getPopulation()))
+                .limit(20)
+                .forEach(entry -> returner.addValue(entry.getValue().getPopulation(), entry.getKey().toString(), entry.getValue().getName()));
 
-                    });
-
-            return returner;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        return returner;
     }
 }
