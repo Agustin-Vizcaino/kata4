@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class DataBaseLoader implements BasicDataLoader {
     protected Connection connection;
     private String prevPath;
-    private String SQL = "";
+    private String SQL = "SELECT * FROM 'City'";
 
     public DataBaseLoader(){}
     @Override
@@ -21,17 +21,19 @@ public class DataBaseLoader implements BasicDataLoader {
         if (!path.equals(prevPath) && !connect(path)) return Stream.empty();
         try {
             prevPath = path;
+            System.out.println("atchoo" + queryAll());
             //I think this is a bad idea
             return queryAll();
         } catch (Exception e) {
+            System.out.println("aaa?");
             System.out.println(e.getMessage());
             return null;
         }
     }
 
     public boolean connect(String path) {
-        try (Connection connectionAttempt = DriverManager.getConnection(urlOf(path))) {
-            connection = connectionAttempt;
+        try {
+            connection = DriverManager.getConnection(urlOf(path));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

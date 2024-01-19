@@ -10,10 +10,10 @@ public class CityDataReader {
     private static final int popThreshold = 1000000;
     private CityDataReader() {}
 
-    //Here we see we made a mistake and produced slight technical debt- Main is not affected by the change from CSV to
-    //database, but this method needs to change
+    //Here we see we made a mistake and produced technical debt- Main is not affected by the change from CSV to
+    //database, but this method needs to change DataFileReader to DataBaseReader
     public static List<City> readCitiesFromPath(String path) throws IOException {
-        List<String> reader = new DataFileReader().readPath(path);
+        List<String> reader = new DataBaseReader().readPath(path);
 
         if (reader != null) {
             //En teoría, no debería lanzar excepción debido al centinela

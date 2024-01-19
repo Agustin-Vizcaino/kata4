@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
+    //private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
+    private static final String path = "cities.db";
     private static MainWindow window;
     public static void main(String[] args) throws IOException {
         LinkedHashMap<String,City> citiesMap = null;
