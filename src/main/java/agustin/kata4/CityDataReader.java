@@ -11,18 +11,15 @@ public class CityDataReader {
     private CityDataReader() {}
 
     //Here we see we made a mistake and produced slight technical debt- Main is not affected by the change from CSV to
-    //database, but CityDataReader needs to switch from calling DataFileReader to DataBaseReader, and from
-    //receiving a BufferedReader to a Stream
+    //database, but this method needs to change
     public static List<City> readCitiesFromPath(String path) throws IOException {
-        BufferedReader reader = DataFileReader.readPath(path);
+        List<String> reader = new DataFileReader().readPath(path);
 
         if (reader != null) {
             //En teoría, no debería lanzar excepción debido al centinela
-            return reader.lines()
-                    .skip(1)
+            return reader.stream()
                     .map(line -> {
                         String[] fields = City.toCityFormat(line);
-                        //System.out.println(fields[4]);
                         return City.makeCity(fields);
                     })
                     .filter(city -> city.getPopulation() >= popThreshold)
