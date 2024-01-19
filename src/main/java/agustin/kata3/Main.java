@@ -1,5 +1,6 @@
 package agustin.kata3;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +16,13 @@ public class Main {
         if (citiesList != null) {
             citiesMap = (HashMap<String,City>) cityHasher(citiesList);
             analyze(citiesMap);
+            generateWindow();
+            setupBarChart(citiesMap);
+            window.setVisible(true);
         } else {
             System.out.println("Error interpreting/reading data");
         }
         //sendDataset(citiesList);
-        sendDataset(citiesMap);
     }
 
     public static Map<String,City> cityHasher(List<City> cities) {
@@ -45,8 +48,10 @@ public class Main {
         window = new MainWindow();
     }
 
-    public static void sendDataset(Map data) {
-        JFCPopulationBarChart.makeDataset(data);
+    public static void setupBarChart(Map data) {
+        BasicBarChart popBarChart = new JFCPopulationBarChart();
+        popBarChart.create(data);
+        window.addBarChart(popBarChart);
     }
 
 }

@@ -20,7 +20,7 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
                 "Population",
                 makeDataset(data),
                 PlotOrientation.VERTICAL,
-                true,false,false);
+                false,false,false);
         add(new ChartPanel(barChart));
     }
 
