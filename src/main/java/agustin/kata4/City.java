@@ -75,7 +75,8 @@ public class City {
 
     public static String[] toCityFormat(String line) {
         String[] fields = line.split(";");
-        return new String[] { fields[0], fields[1], fields[6], fields[7], fields[13] };
+        System.out.println(line);
+        return new String[] { fields[0], fields[1], fields[2], fields[3], fields[4] };
     }
 
     public int compare(City city) {

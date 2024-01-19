@@ -20,6 +20,7 @@ public class DataBaseLoader implements BasicDataLoader {
         //returns true, if is false, method continues, if connect returns false, method stops
         if (!path.equals(prevPath) && !connect(path)) return Stream.empty();
         try {
+            prevPath = path;
             //I think this is a bad idea
             return queryAll();
         } catch (Exception e) {

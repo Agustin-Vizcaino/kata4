@@ -19,7 +19,11 @@ public class DataFileReader implements BasicDataReader {
                     .skip(1)
                     .map(line -> {
                         String[] lineFields = line.split(";");
-                        return lineFields[0] + ";" + lineFields[1] + ";" + lineFields[6] + ";" + lineFields[7] + ";" + lineFields[13];
+                        return lineFields[0] + ";" +
+                                lineFields[1] + ";" +
+                                lineFields[6] + ";" +
+                                lineFields[7] + ";" +
+                                lineFields[13];
                     })
                     .collect(Collectors.toList());
             }
