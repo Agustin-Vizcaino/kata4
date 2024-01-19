@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 
 public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
 
-    @Override
+    /**@Override
     public void create(Map data) {
-        JFreeChart barChart = ChartFactory.createBarChart(
+        JFreeChart barChart = ChartFactory.createStackedBarChart(
                 "Largest cities on Earth compared by population",
                 "City name",
                 "Population",
@@ -40,17 +40,17 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
         chartPanel.setRangeZoomable(true);
 
         add(chartPanel);
-    }
+    }*/
 
-    /**@Override
+    @Override
     public void create(Map data) {
-        JFreeChart barChart = ChartFactory.createBarChart(
+        JFreeChart barChart = ChartFactory.createStackedBarChart(
                 "Largest cities on Earth compared by population",
                 "City name",
                 "Population",
                 makeDataset(data),
                 PlotOrientation.VERTICAL,
-                true, false, false);
+                false, false, false);
 
         CategoryPlot plot = barChart.getCategoryPlot();
         CategoryAxis domainAxis = plot.getDomainAxis();
@@ -73,7 +73,7 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
         renderer.setBasePositiveItemLabelPosition(position);
 
         add(new ChartPanel(barChart));
-    }*/
+    }
 
     public static CategoryDataset makeDataset(Map<Object, City> data) {
         try {
@@ -86,8 +86,9 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
                     .forEach(entry -> {
                         String key = entry.getKey().toString();
                         //Depending on whether you want to show the city names, which doesn't work
-                        returner.addValue((double) entry.getValue().getPopulation(), key, entry.getValue().getName());
-                        //returner.addValue((double) entry.getValue().getPopulation(), key, entry.getValue().getName());
+                        //returner.addValue((double) entry.getValue().getPopulation(), key, "");
+                        returner.addValue(entry.getValue().getPopulation(), key, entry.getValue().getName());
+
                     });
 
             return returner;
