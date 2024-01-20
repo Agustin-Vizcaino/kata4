@@ -1,6 +1,5 @@
 package agustin.kata4;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +7,9 @@ import java.util.stream.Collectors;
 public class CityDataReader {
 
     private static final int popThreshold = 1000000;
-    private CityDataReader() {}
+
+    private CityDataReader() {
+    }
 
     //Here we see we made a mistake and produced technical debt- Main is not affected by the change from CSV to
     //database, but this method needs to change DataFileReader to DataBaseReader

@@ -1,9 +1,11 @@
 package agustin.kata4;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DataFileReader implements BasicDataReader {
     public DataFileReader() {
@@ -15,17 +17,17 @@ public class DataFileReader implements BasicDataReader {
             File file = (File) new DataFileLoader().loadPath(path);
             if (file.exists()) {
                 return new BufferedReader(new FileReader(file))
-                    .lines()
-                    .skip(1)
-                    .map(line -> {
-                        String[] lineFields = line.split(";");
-                        return lineFields[0] + ";" +
-                                lineFields[1] + ";" +
-                                lineFields[6] + ";" +
-                                lineFields[7] + ";" +
-                                lineFields[13];
-                    })
-                    .collect(Collectors.toList());
+                        .lines()
+                        .skip(1)
+                        .map(line -> {
+                            String[] lineFields = line.split(";");
+                            return lineFields[0] + ";" +
+                                    lineFields[1] + ";" +
+                                    lineFields[6] + ";" +
+                                    lineFields[7] + ";" +
+                                    lineFields[13];
+                        })
+                        .collect(Collectors.toList());
             }
             throw new IOException("File does not exist");
         } catch (IOException e) {

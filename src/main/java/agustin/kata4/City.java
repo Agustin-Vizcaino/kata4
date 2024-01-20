@@ -10,33 +10,6 @@ public class City {
     private String country;
     private int population;
 
-    public int getgID() {
-        return gID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFullName() { return name + "-" + countryCode ;}
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getPopulation() {
-        return population;
-    }
-
-    //Patrón FactoryMethod
-    public static City makeCity(String[] data) {
-        return new City(data);
-    }
-
     //Inicializar valores si la entrada es incorrecta
     {
         gID = 0;
@@ -50,6 +23,40 @@ public class City {
     //This class accepts a String[] that contains gID, name, country and population
     private City(String[] data) {
         initialize(data);
+    }
+
+    //Patrón FactoryMethod
+    public static City makeCity(String[] data) {
+        return new City(data);
+    }
+
+    public static String[] toCityFormat(String line) {
+        String[] fields = line.split(";");
+        return new String[]{fields[0], fields[1], fields[2], fields[3], fields[4]};
+    }
+
+    public int getgID() {
+        return gID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFullName() {
+        return name + "-" + countryCode;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public int getPopulation() {
+        return population;
     }
 
     protected int initialize(String[] data) {
@@ -71,12 +78,6 @@ public class City {
     @Override
     public String toString() {
         return "Name: " + getFullName() + ", population: " + getPopulation();
-    }
-
-    public static String[] toCityFormat(String line) {
-        String[] fields = line.split(";");
-        System.out.println(line);
-        return new String[] { fields[0], fields[1], fields[2], fields[3], fields[4] };
     }
 
     public int compare(City city) {

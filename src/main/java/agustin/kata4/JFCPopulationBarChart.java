@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
 
-    private int width = 700;
-    private int height = 700;
+    private final int width = 700;
+    private final int height = 700;
 
     /*@Override
     public void create(Map data) {
@@ -39,6 +39,17 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
 
         add(chartPanel);
     }*/
+
+    public static CategoryDataset makeDataset(Map<Object, City> data) {
+        DefaultCategoryDataset returner = new DefaultCategoryDataset();
+
+        data.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> -entry.getValue().getPopulation()))
+                .limit(20)
+                .forEach(entry -> returner.addValue(entry.getValue().getPopulation(), entry.getKey().toString(), entry.getValue().getName()));
+
+        return returner;
+    }
 
     @Override
     public void create(Map data) {
@@ -74,16 +85,5 @@ public class JFCPopulationBarChart extends JPanel implements BasicBarChart {
         chartPanel.setPreferredSize(new java.awt.Dimension(width, height));
 
         add(chartPanel);
-    }
-
-    public static CategoryDataset makeDataset(Map<Object, City> data) {
-        DefaultCategoryDataset returner = new DefaultCategoryDataset();
-
-        data.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> -entry.getValue().getPopulation()))
-                .limit(20)
-                .forEach(entry -> returner.addValue(entry.getValue().getPopulation(), entry.getKey().toString(), entry.getValue().getName()));
-
-        return returner;
     }
 }

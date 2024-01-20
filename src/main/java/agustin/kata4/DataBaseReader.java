@@ -1,6 +1,5 @@
 package agustin.kata4;
 
-import java.io.BufferedReader;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,13 +13,12 @@ public class DataBaseReader implements BasicDataReader {
             List<String> returner = new ArrayList<String>();
             ResultSet db = (ResultSet) new DataBaseLoader().loadPath(path);
             while (db.next()) {
-                returner.add(String.valueOf(db.getInt("GID")) + ";" +
+                returner.add(db.getInt("GID") + ";" +
                         db.getString("Name") + ";" +
                         db.getString("CountryCode") + ";" +
                         db.getString("Country") + ";" +
-                        String.valueOf(db.getInt("Population")));
+                        db.getInt("Population"));
             }
-            System.out.println(returner);
             return returner;
         } catch (Exception e) {
             System.out.println(e.getMessage());

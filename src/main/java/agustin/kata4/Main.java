@@ -10,8 +10,9 @@ public class Main {
     //private static final String path = "./src/main/resources/geonames-all-cities-with-a-population-1000.csv";
     private static final String path = "cities.db";
     private static MainWindow window;
+
     public static void main(String[] args) throws IOException {
-        LinkedHashMap<String,City> citiesMap = null;
+        LinkedHashMap<String, City> citiesMap = null;
         List<City> citiesList = CityDataReader.readCitiesFromPath(path);
         if (citiesList != null) {
             citiesMap = cityHasher(citiesList);
@@ -33,7 +34,7 @@ public class Main {
                         LinkedHashMap::putAll);
     }
 
-    public static void analyze(HashMap<String,City> citiesMap) {
+    public static void analyze(HashMap<String, City> citiesMap) {
         for (String key : citiesMap.keySet()) {
             System.out.println(citiesMap.get(key).toString());
         }
